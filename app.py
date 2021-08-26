@@ -26,10 +26,10 @@ app.config["suppress_callback_exceptions"] = True
 # Plotly mapbox token
 mapbox_access_token = "pk.eyJ1IjoicGxvdGx5bWFwYm94IiwiYSI6ImNrOWJqb2F4djBnMjEzbG50amg0dnJieG4ifQ.Zme1-Uzoi75IaFbieBDl3A"
 
-state_map = {
+country_map = {
     "AK": "Alaska",
     "AL": "Alabama",
-    "AasdR": "Arkansas",
+    "AR": "Arkansas",
     "AZ": "Arizona",
     "CA": "California",
     "CO": "Colorado",
@@ -80,15 +80,15 @@ state_map = {
     "WY": "Wyoming",
 }
 
-state_list = list(state_map.keys())
+country_list = list(country_map.keys())
 
 # Load data
 data_dict = {}
-for state in state_list:
+for country in country_list:
     p = os.getcwd().split(os.path.sep)
-    csv_path = "data/processed/df_{}_lat_lon.csv".format(state)
-    state_data = pd.read_csv(csv_path)
-    data_dict[state] = state_data
+    csv_path = "data/processed/df_{}_lat_lon.csv".format(country)
+    country_data = pd.read_csv(csv_path)
+    data_dict[country] = country_data
 
 # Cost Metric
 cost_metric = [
@@ -97,7 +97,7 @@ cost_metric = [
     "Average Medicare Payments",
 ]
 
-init_region = data_dict[state_list[1]][
+init_region = data_dict[country_list[1]][
     "Hospital Referral Region (HRR) Description"
 ].unique()
 
@@ -149,13 +149,13 @@ def build_upper_left_panel():
                 className="control-row-1",
                 children=[
                     html.Div(
-                        id="state-select-outer",
+                        id="country-select-outer",
                         children=[
                             html.Label("Select a Drug Product"),
                             dcc.Dropdown(
-                                id="state-select",
-                                options=[{"label": i, "value": i} for i in state_list],
-                                value=state_list[1],
+                                id="country-select",
+                                options=[{"label": i, "value": i} for i in country_list],
+                                value=country_list[1],
                             ),
                         ],
                     ),
@@ -197,13 +197,6 @@ def build_upper_left_panel():
                 id="table-container",
                 className="table-container",
                 children=[
-                    # html.Div(
-                    #     id="table-upper",
-                    #     children=[
-                    #         html.P("Hospital Charges Summary"),
-                    #         dcc.Loading(children=html.Div(id="cost-stats-container")),
-                    #     ],
-                    # ),
                     html.Div(
                         id="table-lower",
                         children=[
@@ -431,8 +424,8 @@ app.layout = html.Div(
                     children=[
                         html.P(
                             id="map-title",
-                            children="Medicare Provider Charges in the State of {}".format(
-                                state_map[state_list[0]]
+                            children="Medicare Provider Charges in {}".format(
+                                country_map[country_list[0]]
                             ),
                         ),
                         html.Div(
@@ -463,7 +456,7 @@ app.layout = html.Div(
                 dcc.Graph(
                     id="procedure-plot",
                     figure=generate_procedure_plot(
-                        data_dict[state_list[1]], cost_metric[0], init_region, []
+                        data_dict[country_list[1]], cost_metric[0], init_region, []
                     ),
                 )
             ],
@@ -478,11 +471,11 @@ app.layout = html.Div(
         Output("region-select", "options"),
         Output("map-title", "children"),
     ],
-    [Input("region-select-all", "value"), Input("state-select", "value"),],
+    [Input("region-select-all", "value"), Input("country-select", "value"),],
 )
-def update_region_dropdown(select_all, state_select):
-    state_raw_data = data_dict[state_select]
-    regions = state_raw_data["Hospital Referral Region (HRR) Description"].unique()
+def update_region_dropdown(select_all, country_select):
+    country_raw_data = data_dict[country_select]
+    regions = country_raw_data["Hospital Referral Region (HRR) Description"].unique()
     options = [{"label": i, "value": i} for i in regions]
 
     ctx = dash.callback_context
@@ -496,7 +489,7 @@ def update_region_dropdown(select_all, state_select):
     return (
         value,
         options,
-        "FDF Manufacturing Locations in the State of {}".format(state_map[state_select]),
+        "FDF Manufacturing Locations in {}".format(country_map[country_select]),
     )
 
 
@@ -532,11 +525,11 @@ def update_checklist(selected, select_options, checked):
         Input("geo-map", "selectedData"),
         Input("procedure-plot", "selectedData"),
         Input("metric-select", "value"),
-        Input("state-select", "value"),
+        Input("country-select", "value"),
     ],
 )
-def update_hospital_datatable(geo_select, procedure_select, cost_select, state_select):
-    state_agg = generate_aggregation(data_dict[state_select], cost_metric)
+def update_hospital_datatable(geo_select, procedure_select, cost_select, country_select):
+    country_agg = generate_aggregation(data_dict[country_select], cost_metric)
     # make table from geo-select
     geo_data_dict = {
         "Provider Name": [],
@@ -556,7 +549,7 @@ def update_hospital_datatable(geo_select, procedure_select, cost_select, state_s
             for point in procedure_select["points"]:
                 provider = point["customdata"]
 
-                dff = state_agg[state_agg["Provider Name"] == provider]
+                dff = country_agg[country_agg["Provider Name"] == provider]
 
                 geo_data_dict["Provider Name"].append(point["customdata"])
                 city = dff["Hospital Referral Region (HRR) Description"].tolist()[0]
@@ -576,7 +569,7 @@ def update_hospital_datatable(geo_select, procedure_select, cost_select, state_s
 
             for point in geo_select["points"]:
                 provider = point["customdata"][0]
-                dff = state_agg[state_agg["Provider Name"] == provider]
+                dff = country_agg[country_agg["Provider Name"] == provider]
 
                 geo_data_dict["Provider Name"].append(point["customdata"][0])
                 geo_data_dict["City"].append(point["customdata"][1].split("- ")[1])
@@ -616,12 +609,16 @@ def update_hospital_datatable(geo_select, procedure_select, cost_select, state_s
         Input("geo-map", "selectedData"),
         Input("metric-select", "value"),
     ],
-    [State("state-select", "value")],
+    [State("country-select", "value")],
 )
-def update_procedure_stats(procedure_select, geo_select, cost_select, state_select):
+def update_procedure_stats(procedure_select, geo_select, cost_select, country_select):
     procedure_dict = {
         "Company Name": [],
-        "Inspection Outcome": [],
+        "Classification": [],
+        "FEI Number": [],
+        "DUNS Number": [],
+        "Inspection ID": [],
+        "Date": [],
         "FDA Link": [],
         "City": [],
     }
@@ -647,9 +644,9 @@ def update_procedure_stats(procedure_select, geo_select, cost_select, state_sele
             provider = point["customdata"][0]
             provider_select.append(provider)
 
-        state_raw_data = data_dict[state_select]
-        provider_filtered = state_raw_data[
-            state_raw_data["Provider Name"].isin(provider_select)
+        country_raw_data = data_dict[country_select]
+        provider_filtered = country_raw_data[
+            country_raw_data["Provider Name"].isin(provider_select)
         ]
 
         for i in range(len(provider_filtered)):
@@ -694,12 +691,12 @@ def update_procedure_stats(procedure_select, geo_select, cost_select, state_sele
         Input("metric-select", "value"),
         Input("region-select", "value"),
         Input("procedure-plot", "selectedData"),
-        Input("state-select", "value"),
+        Input("country-select", "value"),
     ],
 )
-def update_geo_map(cost_select, region_select, procedure_select, state_select):
-    # generate geo map from state-select, procedure-select
-    state_agg_data = generate_aggregation(data_dict[state_select], cost_metric)
+def update_geo_map(cost_select, region_select, procedure_select, country_select):
+    # generate geo map from country-select, procedure-select
+    country_agg_data = generate_aggregation(data_dict[country_select], cost_metric)
 
     provider_data = {"procedure": [], "hospital": []}
     if procedure_select is not None:
@@ -707,7 +704,7 @@ def update_geo_map(cost_select, region_select, procedure_select, state_select):
             provider_data["procedure"].append(point["y"])
             provider_data["hospital"].append(point["customdata"])
 
-    return generate_geo_map(state_agg_data, cost_select, region_select, provider_data)
+    return generate_geo_map(country_agg_data, cost_select, region_select, provider_data)
 
 
 @app.callback(
@@ -716,19 +713,19 @@ def update_geo_map(cost_select, region_select, procedure_select, state_select):
         Input("metric-select", "value"),
         Input("region-select", "value"),
         Input("geo-map", "selectedData"),
-        Input("state-select", "value"),
+        Input("country-select", "value"),
     ],
 )
-def update_procedure_plot(cost_select, region_select, geo_select, state_select):
+def update_procedure_plot(cost_select, region_select, geo_select, country_select):
     # generate procedure plot from selected provider
-    state_raw_data = data_dict[state_select]
+    country_raw_data = data_dict[country_select]
 
     provider_select = []
     if geo_select is not None:
         for point in geo_select["points"]:
             provider_select.append(point["customdata"][0])
     return generate_procedure_plot(
-        state_raw_data, cost_select, region_select, provider_select
+        country_raw_data, cost_select, region_select, provider_select
     )
 
 
