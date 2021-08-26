@@ -18,7 +18,7 @@ app = dash.Dash(
         }
     ],
 )
-app.title = "Medical Provider Charges"
+app.title = "FDF Manufacturing Locations"
 server = app.server
 
 app.config["suppress_callback_exceptions"] = True
@@ -29,7 +29,7 @@ mapbox_access_token = "pk.eyJ1IjoicGxvdGx5bWFwYm94IiwiYSI6ImNrOWJqb2F4djBnMjEzbG
 state_map = {
     "AK": "Alaska",
     "AL": "Alabama",
-    "AR": "Arkansas",
+    "AasdR": "Arkansas",
     "AZ": "Arizona",
     "CA": "California",
     "CO": "Colorado",
@@ -143,7 +143,7 @@ def build_upper_left_panel():
         children=[
             html.P(
                 className="section-title",
-                children="Choose hospital on the map or procedures from the list below to see costs",
+                children="Choose drug product to learn about risks",
             ),
             html.Div(
                 className="control-row-1",
@@ -151,7 +151,7 @@ def build_upper_left_panel():
                     html.Div(
                         id="state-select-outer",
                         children=[
-                            html.Label("Select a State"),
+                            html.Label("Select a Drug Product"),
                             dcc.Dropdown(
                                 id="state-select",
                                 options=[{"label": i, "value": i} for i in state_list],
@@ -176,12 +176,12 @@ def build_upper_left_panel():
                 id="region-select-outer",
                 className="control-row-2",
                 children=[
-                    html.Label("Pick a Region"),
+                    html.Label("Pick a Country"),
                     html.Div(
                         id="checklist-container",
                         children=dcc.Checklist(
                             id="region-select-all",
-                            options=[{"label": "Select All Regions", "value": "All"}],
+                            options=[{"label": "Select All Countries", "value": "All"}],
                             value=[],
                         ),
                     ),
@@ -197,17 +197,17 @@ def build_upper_left_panel():
                 id="table-container",
                 className="table-container",
                 children=[
-                    html.Div(
-                        id="table-upper",
-                        children=[
-                            html.P("Hospital Charges Summary"),
-                            dcc.Loading(children=html.Div(id="cost-stats-container")),
-                        ],
-                    ),
+                    # html.Div(
+                    #     id="table-upper",
+                    #     children=[
+                    #         html.P("Hospital Charges Summary"),
+                    #         dcc.Loading(children=html.Div(id="cost-stats-container")),
+                    #     ],
+                    # ),
                     html.Div(
                         id="table-lower",
                         children=[
-                            html.P("Procedure Charges Summary"),
+                            html.P("Quality Records"),
                             dcc.Loading(
                                 children=html.Div(id="procedure-stats-container")
                             ),
@@ -286,15 +286,15 @@ def generate_geo_map(geo_data, selected_metric, region_select, procedure_select)
                     x=0.9,
                     len=0.7,
                     title=dict(
-                        text="Average Cost",
+                        text="Number of Warning Letters",
                         font={"color": "#737a8d", "family": "Open Sans"},
                     ),
                     titleside="top",
                     tickmode="array",
                     tickvals=[cost_metric_data["min"], cost_metric_data["max"]],
                     ticktext=[
-                        "${:,.2f}".format(cost_metric_data["min"]),
-                        "${:,.2f}".format(cost_metric_data["max"]),
+                        "{:,.0f}".format(cost_metric_data["min"]),
+                        "{:,.0f}".format(cost_metric_data["max"]),
                     ],
                     ticks="outside",
                     thickness=15,
@@ -417,8 +417,7 @@ app.layout = html.Div(
             id="banner",
             className="banner",
             children=[
-                html.H6("Dash Clinical Analytics"),
-                html.Img(src=app.get_asset_url("plotly_logo_white.png")),
+                html.H6("Medicine Supply Map"),
             ],
         ),
         html.Div(
@@ -497,7 +496,7 @@ def update_region_dropdown(select_all, state_select):
     return (
         value,
         options,
-        "Medicare Provider Charges in the State of {}".format(state_map[state_select]),
+        "FDF Manufacturing Locations in the State of {}".format(state_map[state_select]),
     )
 
 
@@ -621,10 +620,10 @@ def update_hospital_datatable(geo_select, procedure_select, cost_select, state_s
 )
 def update_procedure_stats(procedure_select, geo_select, cost_select, state_select):
     procedure_dict = {
-        "DRG": [],
-        "Procedure": [],
-        "Provider Name": [],
-        "Cost Summary": [],
+        "Company Name": [],
+        "Inspection Outcome": [],
+        "FDA Link": [],
+        "City": [],
     }
 
     ctx = dash.callback_context
@@ -668,6 +667,8 @@ def update_procedure_stats(procedure_select, geo_select, cost_select, state_sele
             )
 
     procedure_data_df = pd.DataFrame(data=procedure_dict)
+
+# TODO C:\Users\matthew.christian\msm_viz\app.py:676: FutureWarning: Using short name for 'orient' is deprecated
 
     return dash_table.DataTable(
         id="procedure-stats-table",
