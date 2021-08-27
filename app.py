@@ -9,6 +9,8 @@ from dash.exceptions import PreventUpdate
 import pandas as pd
 import os
 
+# TODO: take the graph thing off https://dash-gallery.plotly.host/dash-word-arithmetic/
+
 app = dash.Dash(
     __name__,
     meta_tags=[

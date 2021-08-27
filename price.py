@@ -1,7 +1,11 @@
 import pandas as pd
 import os
 
+# TODO :https://www.cms.gov/medicare/medicare-part-b-drug-average-sales-price/2021-asp-drug-pricing-files
 # TODO: find these files, scrap them off the internet, link/union/analyze them
+# TODO: create pull request, then merge
+
+
 
 '''
 Problem statement: dynamically pull and link these files, build Jupyter notebook, publish to github
