@@ -1,9 +1,10 @@
 import pandas as pd
 import os
 
-# TODO :https://www.cms.gov/medicare/medicare-part-b-drug-average-sales-price/2021-asp-drug-pricing-files
+# TODO :https://www.cms.gov/medicare/medicare-part-b-drug-average-sales-price/2021-asp-drug-pricing-files, for part B
+# TODO: find Part D, NADAC
 # TODO: find these files, scrap them off the internet, link/union/analyze them
-# TODO: create pull request, then merge
+# TODO: create seperate branch, pull request, then merge
 
 
 
