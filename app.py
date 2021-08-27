@@ -18,7 +18,7 @@ app = dash.Dash(
         }
     ],
 )
-app.title = "FDF Manufacturing Locations"
+app.title = "Medicine Supply Map"
 server = app.server
 
 app.config["suppress_callback_exceptions"] = True
@@ -27,9 +27,9 @@ app.config["suppress_callback_exceptions"] = True
 mapbox_access_token = "pk.eyJ1IjoicGxvdGx5bWFwYm94IiwiYSI6ImNrOWJqb2F4djBnMjEzbG50amg0dnJieG4ifQ.Zme1-Uzoi75IaFbieBDl3A"
 
 country_map = {
-    "AK": "Alaska",
-    "AL": "Alabama",
-    "AR": "Arkansas",
+    "Aspirin Tablet": "Alaska",
+    "Aspirin Capsule": "Alabama",
+    "Aspirin Injection": "Arkansas",
     "AZ": "Arizona",
     "CA": "California",
     "CO": "Colorado",
@@ -90,6 +90,7 @@ for country in country_list:
     country_data = pd.read_csv(csv_path)
     data_dict[country] = country_data
 
+# TODO: remove this
 # Cost Metric
 cost_metric = [
     "Average Covered Charges",
@@ -143,13 +144,14 @@ def build_upper_left_panel():
         children=[
             html.P(
                 className="section-title",
-                children="Choose drug product to learn about risks",
+                children="Drug product scorecard",
             ),
             html.Div(
                 className="control-row-1",
                 children=[
                     html.Div(
                         id="country-select-outer",
+                        style={"width": "50%"},
                         children=[
                             html.Label("Select a Drug Product"),
                             dcc.Dropdown(
@@ -159,6 +161,7 @@ def build_upper_left_panel():
                             ),
                         ],
                     ),
+                    # TODO: remove
                     html.Div(
                         id="select-metric-outer",
                         children=[
@@ -665,7 +668,7 @@ def update_procedure_stats(procedure_select, geo_select, cost_select, country_se
 
     procedure_data_df = pd.DataFrame(data=procedure_dict)
 
-# TODO C:\Users\matthew.christian\msm_viz\app.py:676: FutureWarning: Using short name for 'orient' is deprecated
+# TODO FutureWarning: Using short name for 'orient' is deprecated, fix this error
 
     return dash_table.DataTable(
         id="procedure-stats-table",
@@ -694,6 +697,8 @@ def update_procedure_stats(procedure_select, geo_select, cost_select, country_se
         Input("country-select", "value"),
     ],
 )
+
+# TODO: the map is missing, just the dots are there
 def update_geo_map(cost_select, region_select, procedure_select, country_select):
     # generate geo map from country-select, procedure-select
     country_agg_data = generate_aggregation(data_dict[country_select], cost_metric)
