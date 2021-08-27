@@ -5,7 +5,7 @@ import os
 # TODO: find Part D, NADAC
 # TODO: find these files, scrap them off the internet, link/union/analyze them
 # TODO: create seperate branch, pull request, then merge
-
+# TODO: convert intermediate files to parquet, index=False
 
 
 '''

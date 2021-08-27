@@ -198,6 +198,7 @@ def build_upper_left_panel():
                     ),
                 ],
             ),
+            # TODO: move this container lower and extend table across full screen
             html.Div(
                 id="table-container",
                 className="table-container",
@@ -334,6 +335,7 @@ def generate_geo_map(geo_data, selected_metric, region_select, procedure_select)
     return {"data": hospitals, "layout": layout}
 
 
+# TODO: remove procedure plot and associated data from repo
 def generate_procedure_plot(raw_data, cost_select, region_select, provider_select):
     procedure_data = raw_data[
         raw_data["Hospital Referral Region (HRR) Description"].isin(region_select)
