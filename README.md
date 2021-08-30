@@ -1,15 +1,15 @@
-# dash-medical-provider-charges
+# Practice Medicine Supply Map Case Study
 
 ## About this app
 
-This app creates a dashboard to visualize medical provider charges/costs from US hospitals and clinics.
+This open-ended, free-form case study prepares.
 
-Data are downloaded from open data platform by [Centers for Medicare & Medicaid Services](https://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Inpatient2016.html).  
-This dataset covers national and state summary of inpatient charges in Fiscal Year 2016. Information includes utilization, payment(total and medicare payment), hospital-specific charges for all medicare-certified hospital facilities.
+Data are downloaded from ...  
+This dataset covers ...
 
-Detailed explanation on columns could be found [here](https://data.cms.gov/Medicare-Inpatient/Inpatient-Prospective-Payment-System-IPPS-Provider/fm2n-hjj6)
+No data dictionaries, we are in startup land
 
-## How to run this app locally
+## How to run this app.py locally
 
 To run this app locally, clone this repository and open this app folder in your terminal/Command Prompt. We suggest you to create a virtual environment for installation of required packages for this app.
 
@@ -50,4 +50,4 @@ Select state, cost metric and region to visualize average charges or payments(fo
 
 ## Resources
 * [Dash](https://dash.plot.ly/)
-* Inspired by [tableau template](https://www.tableau.com/solutions/workbook/improve-patient-satisfaction-improving-cycle-time)
+* Inspired by [this set of websites](https://dash-gallery.plotly.host/Portal/)

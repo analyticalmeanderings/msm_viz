@@ -9,6 +9,7 @@ from dash.exceptions import PreventUpdate
 import pandas as pd
 import os
 
+# TODO: make a branch, track down some TODO's, make pull request, resolve conflicts and merge
 # TODO: take the graph thing off https://dash-gallery.plotly.host/dash-word-arithmetic/
 
 app = dash.Dash(
