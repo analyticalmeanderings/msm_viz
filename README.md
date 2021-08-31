@@ -9,7 +9,7 @@ This dataset covers ...
 
 No data dictionaries, we are in startup land
 
-## How to run this app.py locally
+## How to run app.py locally
 
 To run this app locally, clone this repository and open this app folder in your terminal/Command Prompt. We suggest you to create a virtual environment for installation of required packages for this app.
 
