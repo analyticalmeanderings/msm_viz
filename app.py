@@ -187,6 +187,7 @@ def build_upper_left_panel():
                         id="checklist-container",
                         children=dcc.Checklist(
                             id="region-select-all",
+                            # TODO: populate with country, not states or county data
                             options=[{"label": "Select All Countries", "value": "All"}],
                             value=[],
                         ),
@@ -207,6 +208,7 @@ def build_upper_left_panel():
                     html.Div(
                         id="table-lower",
                         children=[
+                            # TODO: reach out to Meenakshi, get a pull of these records
                             html.P("Quality Records"),
                             dcc.Loading(
                                 children=html.Div(id="procedure-stats-container")
@@ -498,6 +500,7 @@ def update_region_dropdown(select_all, country_select):
         value,
         options,
         "FDF Manufacturing Locations in {}".format(country_map[country_select]),
+        # TODO: when you click on a dot in the map, filter the quality records to that facility
     )
 
 
