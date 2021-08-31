@@ -1,4 +1,4 @@
-# Practice Medicine Supply Map Case Study
+# Practice Case Study
 
 ## About this app
 
