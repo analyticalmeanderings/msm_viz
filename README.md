@@ -2,7 +2,7 @@
 
 ## About this app
 
-This open-ended, free-form case study prepares.
+This open-ended, free-form case study.
 
 Data are downloaded from ...  
 This dataset covers ...
@@ -42,7 +42,7 @@ python app.py
 
 ## How to use this app
 
-Select state, cost metric and region to visualize average charges or payments(for all medical procedures) on the map. Click on individual hospital from map to highlight its procedure-specific charges on the bottom chart. You may also click or select individual data from bottom plot to view its geological location, as well as charges/payment summaries from datatable.
+Select x, y, and z to visualize abc on the map. Click on individual x from map to highlight its x on the bottom chart. You may also click or select individual data from bottom plot to view its x, as well as x summaries from datatable.
 
 ## Screenshot
 
