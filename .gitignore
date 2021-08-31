@@ -1,0 +1,6 @@
+# Ignore IDE directories
+.idea/
+.vscode/
+
+# Ignore venv stuff
+venv/
