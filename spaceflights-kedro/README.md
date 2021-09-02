@@ -15,8 +15,8 @@ In order to get the best out of the template:
 * Don't commit data to your repository
 * Don't commit any credentials or your local configuration to your repository. Keep all your credentials and local configuration in `conf/local/`
 
-# To start with Kedro
-## 1.Installation prerequisites
+## To start with Kedro
+#### 1.Installation prerequisites
 create or activate conda (Virtual environments)
 ```
 conda create --name kedro-environment python=3.7 -y
@@ -30,7 +30,7 @@ To exit kedro-environment:
 ```
 conda deactivate
 ```
-## 2.install kedro
+#### 2.install kedro
 ```
 pip install kedro
 ```
@@ -38,7 +38,7 @@ To check that Kedro is installed:
 ```
 kedro info
 ```
-## 3.Create new Kedro project
+#### 3.Create new Kedro project
 Create a new project in your current working directory:
 ```
 kedro new
@@ -49,12 +49,12 @@ If you are using git, you may want to set up a new repository by calling:
 git init
 ```
 
-# Start working on Kedro project
+## Start working on Kedro project
 Once Kedro project is created
 ```
 Activate conda environment
 ```
-## How to install dependencies
+### How to install dependencies
 
 Declare any dependencies in `src/requirements.txt` for `pip` installation and `src/environment.yml` for `conda` installation.
 
@@ -64,18 +64,18 @@ To install them, run:
 kedro install
 ```
 
-## How to run Kedro
+### How to run Kedro
 
 You can run your Kedro project with:
 
 ```
 kedro run
 ```
-## How to check lists of pipeline
+### How to check lists of pipeline
 ```
 kedro pipeline list
 ```
-## How to test your Kedro project
+### How to test your Kedro project
 
 Have a look at the file `src/tests/test_run.py` for instructions on how to write your tests. You can run your tests as follows:
 
@@ -85,8 +85,18 @@ kedro test
 
 To configure the coverage threshold, look at the `.coveragerc` file.
 
+### How to visualize pipeline
+You can install Kedro-Viz by running:
+```
+pip install kedro-viz
+```
+Visualise a whole pipeline
+You should be in your project root directory, and once Kedro-Viz is installed you can visualise your pipeline by running:
+```
+kedro viz
+```
 
-## Project dependencies
+### Project dependencies
 
 To generate or update the dependency requirements for your project:
 
