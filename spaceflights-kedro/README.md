@@ -15,23 +15,22 @@ In order to get the best out of the template:
 * Don't commit data to your repository
 * Don't commit any credentials or your local configuration to your repository. Keep all your credentials and local configuration in `conf/local/`
 
-## Installation prerequisites
+# To start with Kedro
+## 1.Installation prerequisites
 create or activate conda (Virtual environments)
 ```
 conda create --name kedro-environment python=3.7 -y
 ```
 This will create an isolated Python 3.7 environment. 
-
 To activate it:
 ```
 conda activate kedro-environment
 ```
-
 To exit kedro-environment:
 ```
 conda deactivate
 ```
-## install kedro
+## 2.install kedro
 ```
 pip install kedro
 ```
@@ -39,7 +38,22 @@ To check that Kedro is installed:
 ```
 kedro info
 ```
+## 3.Create new Kedro project
+Create a new project in your current working directory:
+```
+kedro new
+```
+Initialise a git repository
+If you are using git, you may want to set up a new repository by calling:
+```
+git init
+```
 
+# Start working on Kedro project
+Once Kedro project is created
+```
+Activate conda environment
+```
 ## How to install dependencies
 
 Declare any dependencies in `src/requirements.txt` for `pip` installation and `src/environment.yml` for `conda` installation.
@@ -57,7 +71,10 @@ You can run your Kedro project with:
 ```
 kedro run
 ```
-
+## How to check lists of pipeline
+```
+kedro pipeline list
+```
 ## How to test your Kedro project
 
 Have a look at the file `src/tests/test_run.py` for instructions on how to write your tests. You can run your tests as follows:
