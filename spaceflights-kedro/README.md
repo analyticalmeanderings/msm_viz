@@ -15,6 +15,31 @@ In order to get the best out of the template:
 * Don't commit data to your repository
 * Don't commit any credentials or your local configuration to your repository. Keep all your credentials and local configuration in `conf/local/`
 
+## Installation prerequisites
+create or activate conda (Virtual environments)
+```
+conda create --name kedro-environment python=3.7 -y
+```
+This will create an isolated Python 3.7 environment. 
+
+To activate it:
+```
+conda activate kedro-environment
+```
+
+To exit kedro-environment:
+```
+conda deactivate
+```
+## install kedro
+```
+pip install kedro
+```
+To check that Kedro is installed:
+```
+kedro info
+```
+
 ## How to install dependencies
 
 Declare any dependencies in `src/requirements.txt` for `pip` installation and `src/environment.yml` for `conda` installation.
