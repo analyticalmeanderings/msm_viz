@@ -65,6 +65,26 @@ To install them, run:
 ```
 kedro install
 ```
+#### Project dependencies
+To generate or update the dependency requirements for your project:
+Example: add a requirement for the pandas project
+```
+pip install "kedro[pandas.CSVDataSet,pandas.ExcelDataSet]"
+```
+Alternatively, if you need to, you can edit src/requirements.txt directly to modify your list of dependencies by replacing the requirement kedro==0.17.4 with the following (your version of Kedro may be different):
+```
+kedro[pandas.CSVDataSet,pandas.ExcelDataSet]==0.17.4
+```
+Then run the following:
+```
+kedro build-reqs
+```
+
+This will copy the contents of `src/requirements.txt` into a new file `src/requirements.in` which will be used as the source for [`pip-compile`](https://github.com/jazzband/pip-tools#example-usage-for-pip-compile). You can see the output of the resolution by opening `src/requirements.txt`.
+
+After this, if you'd like to update your project requirements, please update `src/requirements.in` and re-run `kedro build-reqs`.
+
+[Further information about project dependencies](https://kedro.readthedocs.io/en/stable/04_kedro_project_setup/01_dependencies.html#project-specific-dependencies)
 
 ### How to run Kedro
 
