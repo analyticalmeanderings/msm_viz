@@ -147,6 +147,8 @@ And if you want to run an IPython session:
 kedro ipython
 ```
 
+## Working in Jupyter notebook
+
 ### How to convert notebook cells to nodes in a Kedro project
 You can move notebook code over into a Kedro project structure using a mixture of [cell tagging](https://jupyter-notebook.readthedocs.io/en/stable/changelog.html#cell-tags) and Kedro CLI commands.
 
