@@ -48,6 +48,8 @@ If you are using git, you may want to set up a new repository by calling:
 ```
 git init
 ```
+## Kedro’s command line interface
+https://kedro.readthedocs.io/en/latest/09_development/03_commands_reference.html
 
 ## Start working on Kedro project
 Once Kedro project is created
