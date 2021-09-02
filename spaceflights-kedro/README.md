@@ -170,8 +170,17 @@ kedro ipython
 ```
 
 ## Working in Jupyter notebook
+1) Use notebook to write node function or pipeline function
+2) Add tags as node (for node function)
+3) convert .ipynb to .py using command:
+> pip install ipython #skip if already installed\
+> pip install nbconvert  #skip if already installed
 
-### How to convert notebook cells to nodes in a Kedro project
+### command to convert using nbconvert:
+```
+jupyter nbconvert nodes.ipynb to python
+```
+### OR How to convert notebook cells to nodes in a Kedro project
 You can move notebook code over into a Kedro project structure using a mixture of [cell tagging](https://jupyter-notebook.readthedocs.io/en/stable/changelog.html#cell-tags) and Kedro CLI commands.
 
 By adding the `node` tag to a cell and running the command below, the cell's source code will be copied over to a Python file within `src/<package_name>/nodes/`:
