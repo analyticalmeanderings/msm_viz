@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 
+# Skip for now ... manually downloading files seem easier
 # TODO :https://www.cms.gov/medicare/medicare-part-b-drug-average-sales-price/2021-asp-drug-pricing-files, for part B
 # TODO: find Part D, NADAC
 # TODO: find these files, scrap them off the internet, link/union/analyze them
