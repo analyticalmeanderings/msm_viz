@@ -8,7 +8,7 @@ Train:test = 80/20
 
 Predict Y: Price\
 predictors (8): engines, passenger_capacity, crew, d_check_complete, moon_clearance_complete, iata_approved, company_rating, review_scores_rating\
-Model performance: R2 = 0.462
+Model performance: R^2 = 0.462
 
 ## Overview
 
