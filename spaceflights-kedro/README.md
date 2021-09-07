@@ -1,8 +1,8 @@
-# space2
+# spaceflights
 
 ## Overview
 
-This is your new Kedro project, which was generated using `Kedro 0.17.4`.
+This is your new Kedro project, which was generated using `Kedro 0.17.4`, with the completed version of the [spaceflights tutorial](https://kedro.readthedocs.io/en/stable/03_tutorial/01_spaceflights_tutorial.html) and the data necessary to run the project.
 
 Take a look at the [Kedro documentation](https://kedro.readthedocs.io) to get started.
 
@@ -11,11 +11,52 @@ Take a look at the [Kedro documentation](https://kedro.readthedocs.io) to get st
 In order to get the best out of the template:
 
 * Don't remove any lines from the `.gitignore` file we provide
-* Make sure your results can be reproduced by following a [data engineering convention](https://kedro.readthedocs.io/en/stable/12_faq/01_faq.html#what-is-data-engineering-convention)
+* Make sure your results can be reproduced by following a [data engineering convention](https://kedro.readthedocs.io/en/stable/11_faq/01_faq.html#what-is-data-engineering-convention)
 * Don't commit data to your repository
 * Don't commit any credentials or your local configuration to your repository. Keep all your credentials and local configuration in `conf/local/`
 
-## How to install dependencies
+## To start with Kedro
+#### 1.Installation prerequisites
+create or activate conda (Virtual environments)
+```
+conda create --name kedro-environment python=3.7 -y
+```
+This will create an isolated Python 3.7 environment. 
+To activate it:
+```
+conda activate kedro-environment
+```
+To exit kedro-environment:
+```
+conda deactivate
+```
+#### 2.install kedro
+```
+pip install kedro
+```
+To check that Kedro is installed:
+```
+kedro info
+```
+#### 3.Create new Kedro project
+Create a new project in your current working directory:
+```
+kedro new
+```
+Initialise a git repository
+If you are using git, you may want to set up a new repository by calling:
+```
+git init
+```
+## Kedro’s command line interface
+https://kedro.readthedocs.io/en/latest/09_development/03_commands_reference.html
+
+## Start working on Kedro project
+Once Kedro project is created
+```
+Activate conda environment
+```
+### How to install dependencies
 
 Declare any dependencies in `src/requirements.txt` for `pip` installation and `src/environment.yml` for `conda` installation.
 
@@ -24,16 +65,39 @@ To install them, run:
 ```
 kedro install
 ```
+#### Project dependencies
+To generate or update the dependency requirements for your project:
+Example: add a requirement for the pandas project
+```
+pip install "kedro[pandas.CSVDataSet,pandas.ExcelDataSet]"
+```
+Alternatively, if you need to, you can edit src/requirements.txt directly to modify your list of dependencies by replacing the requirement kedro==0.17.4 with the following (your version of Kedro may be different):
+```
+kedro[pandas.CSVDataSet,pandas.ExcelDataSet]==0.17.4
+```
+Then run the following:
+```
+kedro build-reqs
+```
 
-## How to run your Kedro pipeline
+This will copy the contents of `src/requirements.txt` into a new file `src/requirements.in` which will be used as the source for [`pip-compile`](https://github.com/jazzband/pip-tools#example-usage-for-pip-compile). You can see the output of the resolution by opening `src/requirements.txt`.
+
+After this, if you'd like to update your project requirements, please update `src/requirements.in` and re-run `kedro build-reqs`.
+
+[Further information about project dependencies](https://kedro.readthedocs.io/en/stable/04_kedro_project_setup/01_dependencies.html#project-specific-dependencies)
+
+### How to run Kedro
 
 You can run your Kedro project with:
 
 ```
 kedro run
 ```
-
-## How to test your Kedro project
+### How to check lists of pipeline
+```
+kedro pipeline list
+```
+### How to test your Kedro project
 
 Have a look at the file `src/tests/test_run.py` for instructions on how to write your tests. You can run your tests as follows:
 
@@ -41,9 +105,20 @@ Have a look at the file `src/tests/test_run.py` for instructions on how to write
 kedro test
 ```
 
-To configure the coverage threshold, go to the `.coveragerc` file.
+To configure the coverage threshold, look at the `.coveragerc` file.
 
-## Project dependencies
+### How to visualize pipeline
+You can install Kedro-Viz by running:
+```
+pip install kedro-viz
+```
+Visualise a whole pipeline
+You should be in your project root directory, and once Kedro-Viz is installed you can visualise your pipeline by running:
+```
+kedro viz
+```
+
+### Project dependencies
 
 To generate or update the dependency requirements for your project:
 
@@ -51,7 +126,7 @@ To generate or update the dependency requirements for your project:
 kedro build-reqs
 ```
 
-This will copy the contents of `src/requirements.txt` into a new file `src/requirements.in` which will be used as the source for `pip-compile`. You can see the output of the resolution by opening `src/requirements.txt`.
+This will copy the contents of `src/requirements.txt` into a new file `src/requirements.in` which will be used as the source for [`pip-compile`](https://github.com/jazzband/pip-tools#example-usage-for-pip-compile). You can see the output of the resolution by opening `src/requirements.txt`.
 
 After this, if you'd like to update your project requirements, please update `src/requirements.in` and re-run `kedro build-reqs`.
 
@@ -60,8 +135,6 @@ After this, if you'd like to update your project requirements, please update `sr
 ## How to work with Kedro and notebooks
 
 > Note: Using `kedro jupyter` or `kedro ipython` to run your notebook provides these variables in scope: `context`, `catalog`, and `startup_error`.
->
-> Jupyter, JupyterLab, and IPython are already included in the project requirements by default, so once you have run `kedro install` you will not need to take any extra steps before you use them.
 
 ### Jupyter
 To use Jupyter notebooks in your Kedro project, you need to install Jupyter:
@@ -96,8 +169,19 @@ And if you want to run an IPython session:
 kedro ipython
 ```
 
-### How to convert notebook cells to nodes in a Kedro project
-You can move notebook code over into a Kedro project structure using a mixture of [cell tagging](https://jupyter-notebook.readthedocs.io/en/stable/changelog.html#release-5-0-0) and Kedro CLI commands.
+## Working in Jupyter notebook
+1) Use notebook to write node function or pipeline function
+2) Add tags as node (for node function)
+3) convert .ipynb to .py using command:
+> pip install ipython #skip if already installed\
+> pip install nbconvert  #skip if already installed
+
+### command to convert using nbconvert:
+```
+jupyter nbconvert nodes.ipynb to python
+```
+### OR How to convert notebook cells to nodes in a Kedro project
+You can move notebook code over into a Kedro project structure using a mixture of [cell tagging](https://jupyter-notebook.readthedocs.io/en/stable/changelog.html#cell-tags) and Kedro CLI commands.
 
 By adding the `node` tag to a cell and running the command below, the cell's source code will be copied over to a Python file within `src/<package_name>/nodes/`:
 
