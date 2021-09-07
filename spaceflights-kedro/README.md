@@ -1,5 +1,8 @@
 # spaceflights
 
+## Pipeline Visualization
+![image](https://user-images.githubusercontent.com/89658443/132395241-e184cc14-c22f-40c4-8ed1-e0851a9c1ee3.png)
+
 ## Overview
 
 This is your new Kedro project, which was generated using `Kedro 0.17.4`, with the completed version of the [spaceflights tutorial](https://kedro.readthedocs.io/en/stable/03_tutorial/01_spaceflights_tutorial.html) and the data necessary to run the project.
