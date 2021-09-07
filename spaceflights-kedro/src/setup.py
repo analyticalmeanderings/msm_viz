@@ -29,7 +29,7 @@
 from setuptools import find_packages, setup
 
 entry_point = (
-    "spaceflights-kedro = spaceflights.__main__:main"
+    "space2 = space2.__main__:main"
 )
 
 
@@ -45,7 +45,7 @@ with open("requirements.txt", "r", encoding="utf-8") as f:
             requires.append(req)
 
 setup(
-    name="spaceflights",
+    name="space2",
     version="0.1",
     packages=find_packages(exclude=["tests"]),
     entry_points={"console_scripts": [entry_point]},
@@ -55,11 +55,11 @@ setup(
             "sphinx~=3.4.3",
             "sphinx_rtd_theme==0.5.1",
             "nbsphinx==0.8.1",
-            "nbstripout==0.3.3",
+            "nbstripout~=0.4",
             "recommonmark==0.7.1",
             "sphinx-autodoc-typehints==1.11.1",
             "sphinx_copybutton==0.3.1",
-            "ipykernel~=5.3",
+            "ipykernel==6.3.1",
         ]
     },
 )

@@ -1,6 +1,6 @@
 [tool.kedro]
-package_name = "spaceflights"
-project_name = "spaceflights"
+package_name = "space2"
+project_name = "space2"
 project_version = "0.17.4"
 
 [tool.isort]
@@ -14,4 +14,4 @@ known_third_party = "kedro"
 [tool.pytest.ini_options]
 addopts = """
 --cov-report term-missing \
---cov src/spaceflights -ra"""
+--cov src/space2 -ra"""

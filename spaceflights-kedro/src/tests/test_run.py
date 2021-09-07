@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 # EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
@@ -19,7 +19,7 @@
 # trademarks of QuantumBlack. The License does not grant you any right or
 # license to the QuantumBlack Trademarks. You may not use the QuantumBlack
 # Trademarks or any confusingly similar mark as a trademark for your product,
-#     or use the QuantumBlack Trademarks in any other manner that might cause
+# or use the QuantumBlack Trademarks in any other manner that might cause
 # confusion in the marketplace, including but not limited to in advertising,
 # on websites, or on software.
 #
@@ -33,8 +33,9 @@ Tests should be placed in ``src/tests``, in modules that mirror your
 project's structure, and in files named test_*.py. They are simply functions
 named ``test_*`` which test a unit of logic.
 
-To run the tests, run ``kedro test``.
+To run the tests, run ``kedro test`` from the project root directory.
 """
+
 from pathlib import Path
 
 import pytest
@@ -43,7 +44,9 @@ from kedro.framework.context import KedroContext
 
 @pytest.fixture
 def project_context():
-    return KedroContext(package_name="spaceflights", project_path=Path.cwd())
+    return KedroContext(
+        package_name="space2", project_path=Path.cwd()
+    )
 
 
 # The tests below are here for the demonstration purpose
@@ -51,4 +54,4 @@ def project_context():
 # functionality
 class TestProjectContext:
     def test_package_name(self, project_context):
-        assert project_context.package_name == "spaceflights"
+        assert project_context.package_name == "space2"

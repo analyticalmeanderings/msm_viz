@@ -26,31 +26,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Project hooks."""
-from typing import Any, Dict, Iterable, Optional
+"""Project settings."""
+from space2.hooks import ProjectHooks
 
-from kedro.config import ConfigLoader
-from kedro.framework.hooks import hook_impl
-from kedro.io import DataCatalog
-from kedro.versioning import Journal
+# Instantiate and list your project hooks here
+HOOKS = (ProjectHooks(),)
 
+# List the installed plugins for which to disable auto-registry
+# DISABLE_HOOKS_FOR_PLUGINS = ("kedro-viz",)
 
-class ProjectHooks:
-    @hook_impl
-    def register_config_loader(
-        self, conf_paths: Iterable[str], env: str, extra_params: Dict[str, Any]
-    ) -> ConfigLoader:
-        return ConfigLoader(conf_paths)
+# Define where to store data from a KedroSession. Defaults to BaseSessionStore.
+# from kedro.framework.session.store import ShelveStore
+# SESSION_STORE_CLASS = ShelveStore
 
-    @hook_impl
-    def register_catalog(
-        self,
-        catalog: Optional[Dict[str, Dict[str, Any]]],
-        credentials: Dict[str, Dict[str, Any]],
-        load_versions: Dict[str, str],
-        save_version: str,
-        journal: Journal,
-    ) -> DataCatalog:
-        return DataCatalog.from_config(
-            catalog, credentials, load_versions, save_version, journal
-        )
+# Define keyword arguments to be passed to `SESSION_STORE_CLASS` constructor
+# SESSION_STORE_ARGS = {
+#     "path": "./sessions"
+# }
+
+# Define custom context class. Defaults to `KedroContext`
+# CONTEXT_CLASS = KedroContext
+
+# Define the configuration folder. Defaults to `conf`
+# CONF_ROOT = "conf"
