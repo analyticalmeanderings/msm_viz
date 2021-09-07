@@ -7,7 +7,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 # EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
@@ -22,14 +22,14 @@
 # trademarks of QuantumBlack. The License does not grant you any right or
 # license to the QuantumBlack Trademarks. You may not use the QuantumBlack
 # Trademarks or any confusingly similar mark as a trademark for your product,
-#     or use the QuantumBlack Trademarks in any other manner that might cause
+# or use the QuantumBlack Trademarks in any other manner that might cause
 # confusion in the marketplace, including but not limited to in advertising,
 # on websites, or on software.
 #
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# spaceflights documentation build
+# space2 documentation build
 # configuration file, created by sphinx-quickstart.
 #
 # This file is execfile()d with the current directory set to its
@@ -49,11 +49,12 @@ import re
 
 from kedro.framework.cli.utils import find_stylesheets
 from recommonmark.transform import AutoStructify
-from spaceflights import __version__ as release
+
+from space2 import __version__ as release
 
 # -- Project information -----------------------------------------------------
 
-project = "spaceflights"
+project = "space2"
 copyright = "2021, QuantumBlack Visual Analytics Limited"
 author = "QuantumBlack"
 
@@ -148,7 +149,7 @@ html_show_sourcelink = False
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "spaceflightsdoc"
+htmlhelp_basename = "space2doc"
 
 # -- Options for LaTeX output ------------------------------------------------
 
@@ -176,8 +177,8 @@ latex_elements = {
 latex_documents = [
     (
         master_doc,
-        "spaceflights.tex",
-        "spaceflights Documentation",
+        "space2.tex",
+        "space2 Documentation",
         "QuantumBlack",
         "manual",
     )
@@ -190,8 +191,8 @@ latex_documents = [
 man_pages = [
     (
         master_doc,
-        "spaceflights",
-        "spaceflights Documentation",
+        "space2",
+        "space2 Documentation",
         [author],
         1,
     )
@@ -205,11 +206,11 @@ man_pages = [
 texinfo_documents = [
     (
         master_doc,
-        "spaceflights",
-        "spaceflights Documentation",
+        "space2",
+        "space2 Documentation",
         author,
-        "spaceflights",
-        "Project spaceflights codebase.",
+        "space2",
+        "Project space2 codebase.",
         "Data-Science",
     )
 ]
