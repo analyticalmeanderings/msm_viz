@@ -3,7 +3,7 @@
 ## Pipeline Visualization
 ![image](https://user-images.githubusercontent.com/89658443/132395241-e184cc14-c22f-40c4-8ed1-e0851a9c1ee3.png)
 
-Analytics: Regression
+Analytics: Regression\
 Train:test = 80/20
 
 Predict Y: Price\
