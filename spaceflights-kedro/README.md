@@ -3,6 +3,13 @@
 ## Pipeline Visualization
 ![image](https://user-images.githubusercontent.com/89658443/132395241-e184cc14-c22f-40c4-8ed1-e0851a9c1ee3.png)
 
+Analytics: Regression
+Train:test = 80/20
+
+Predict Y: Price\
+predictors (8): engines, passenger_capacity, crew, d_check_complete, moon_clearance_complete, iata_approved, company_rating, review_scores_rating\
+Model performance: R2 = 0.462
+
 ## Overview
 
 This is your new Kedro project, which was generated using `Kedro 0.17.4`, with the completed version of the [spaceflights tutorial](https://kedro.readthedocs.io/en/stable/03_tutorial/01_spaceflights_tutorial.html) and the data necessary to run the project.
