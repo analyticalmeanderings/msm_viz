@@ -1,6 +1,6 @@
 # spaceflights
 
-## Pipeline Visualization
+## RESULT: Pipeline Visualization
 ![kedro-pipeline](https://user-images.githubusercontent.com/89658443/132557259-f0d4f211-771c-407f-a1b1-c0f0e853e9ca.png)
 
 
