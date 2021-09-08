@@ -5,7 +5,7 @@
 
 companies:
   type: pandas.CSVDataSet
-  filepath: data/01_raw/Allcompanies.csv
+  filepath: data/01_raw/companies.csv
   layer: raw
 
 reviews:
@@ -16,6 +16,11 @@ reviews:
 shuttles:
   type: pandas.ExcelDataSet
   filepath: data/01_raw/shuttles.xlsx
+  layer: raw
+  
+company_names:
+  type: pandas.ExcelDataSet
+  filepath: data/01_raw/company_names.xlsx
   layer: raw
   
 preprocessed_companies:

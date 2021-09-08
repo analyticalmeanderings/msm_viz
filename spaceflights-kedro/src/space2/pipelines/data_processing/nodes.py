@@ -23,18 +23,20 @@ def _parse_money(x):
     return x
 
 
-def preprocess_companies(companies: pd.DataFrame) -> pd.DataFrame:
+def preprocess_companies(companies: pd.DataFrame, company_names: pd.DataFrame) -> pd.DataFrame:
     """Preprocesses the data for companies.
 
     Args:
         companies: Raw data.
+        company_names: Raw data.
     Returns:
         Preprocessed data, with `company_rating` converted to a float and
-        `iata_approved` converted to boolean.
+        `iata_approved` converted to boolean, and merged with company_names.
     """
     companies["iata_approved"] = _is_true(companies["iata_approved"])
     companies["company_rating"] = _parse_percentage(companies["company_rating"])
-    return companies
+    Allcompanies = company_names.merge(companies,  on="id", how="inner")
+    return Allcompanies
 
 
 def preprocess_shuttles(shuttles: pd.DataFrame) -> pd.DataFrame:
