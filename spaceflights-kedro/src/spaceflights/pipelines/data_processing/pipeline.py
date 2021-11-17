@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 # EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
@@ -19,26 +19,37 @@
 # trademarks of QuantumBlack. The License does not grant you any right or
 # license to the QuantumBlack Trademarks. You may not use the QuantumBlack
 # Trademarks or any confusingly similar mark as a trademark for your product,
-# or use the QuantumBlack Trademarks in any other manner that might cause
+#     or use the QuantumBlack Trademarks in any other manner that might cause
 # confusion in the marketplace, including but not limited to in advertising,
 # on websites, or on software.
 #
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""space2 file for ensuring the package is executable
-as `space2` and `python -m space2`
-"""
-from pathlib import Path
+from kedro.pipeline import Pipeline, node
 
-from kedro.framework.project import configure_project
-
-from .cli import run
+from .nodes import create_model_input_table, preprocess_companies, preprocess_shuttles
 
 
-def main():
-    configure_project(Path(__file__).parent.name)
-    run()
-
-
-if __name__ == "__main__":
-    main()
+def create_pipeline(**kwargs):
+    return Pipeline(
+        [
+            node(
+                func=preprocess_companies,
+                inputs="companies",
+                outputs="preprocessed_companies",
+                name="preprocess_companies_node",
+            ),
+            node(
+                func=preprocess_shuttles,
+                inputs="shuttles",
+                outputs="preprocessed_shuttles",
+                name="preprocess_shuttles_node",
+            ),
+            node(
+                func=create_model_input_table,
+                inputs=["preprocessed_shuttles", "preprocessed_companies", "reviews"],
+                outputs="model_input_table",
+                name="create_model_input_table_node",
+            ),
+        ]
+    )
