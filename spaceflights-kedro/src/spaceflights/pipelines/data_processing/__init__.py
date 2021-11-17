@@ -25,7 +25,7 @@
 #
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""space2
-"""
 
-__version__ = "0.1"
+"""Complete Data Processing pipeline for the spaceflights tutorial"""
+
+from .pipeline import create_pipeline  # NOQA
